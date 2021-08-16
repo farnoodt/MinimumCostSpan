@@ -8,7 +8,7 @@ namespace MinimumCostSpan
 {
     class Edge : IComparable<Edge>
     {
-        public int source;
+        public int Source;
         public int Destination;
         public int Weight;
 
@@ -16,11 +16,11 @@ namespace MinimumCostSpan
         {
 
         }
-        public Edge(int Destination, int Weight)
+        public Edge(int Source,int Destination, int Weight)
         {
             this.Destination = Destination;
             this.Weight = Weight;
-
+            this.Source = Source;
         }
 
         

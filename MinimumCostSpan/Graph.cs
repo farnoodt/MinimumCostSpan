@@ -22,7 +22,7 @@ namespace MinimumCostSpan
         {
             MyGraph[Edge].Destination = Destination;
             MyGraph[Edge].Weight = Weight;
-            MyGraph[Edge].source = Source;
+            MyGraph[Edge].Source = Source;
         }
          
         public void KruskalMST()
@@ -37,14 +37,12 @@ namespace MinimumCostSpan
 
             Subset[] subsets = new Subset[Node];
             for (i = 0; i < Node; ++i)
-                subsets[i] = new Subset();
-
-
-            for (int v = 0; v < Node; ++v)
             {
-                subsets[v].Parent = v;
-                subsets[v].Rank = 0;
+                subsets[i] = new Subset();
+                subsets[i].Parent = i;
+                subsets[i].Rank = 0;
             }
+
 
             i = 0; // Index used to pick next edge 
 
@@ -55,8 +53,8 @@ namespace MinimumCostSpan
                 Edge next_edge = new Edge();
                 next_edge = MyGraph[i++];
 
-                int x = S.Find(subsets, next_edge.source);
-                int y = S.Find(subsets, next_edge.Destination);
+                int x = S.FindParent(subsets, next_edge.Source);
+                int y = S.FindParent(subsets, next_edge.Destination);
 
                 // If including this edge does't cause cycle, 
                 // include it in result and increment the index 
@@ -67,9 +65,9 @@ namespace MinimumCostSpan
                     S.Union(subsets, x, y);
                 }
             }
+            
             for (i = 0; i < e; ++i)
-                Console.WriteLine(result[i].source + " -- " +
-                result[i].Destination + " == " + result[i].Weight);
+                Console.WriteLine(result[i].Source + " -- " + result[i].Destination + " == " + result[i].Weight);
             Console.ReadLine();
         }
     }

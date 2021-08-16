@@ -11,10 +11,10 @@ namespace MinimumCostSpan
         public int Parent;
         public int Rank;
 
-        public int Find(Subset[] Subsets, int i)
+        public int FindParent(Subset[] Subsets, int i)
         {
             if (Subsets[i].Parent != i)
-                Subsets[i].Parent = Find(Subsets, Subsets[i].Parent);
+                Subsets[i].Parent = FindParent(Subsets, Subsets[i].Parent);
 
             return Subsets[i].Parent;
 
@@ -22,8 +22,8 @@ namespace MinimumCostSpan
 
         public void Union(Subset[] subsets, int X, int Y)
         {
-            int xRoot = Find(subsets, X);
-            int yRoot = Find(subsets, Y);
+            int xRoot = FindParent(subsets, X);
+            int yRoot = FindParent(subsets, Y);
 
             if (subsets[xRoot].Rank > subsets[yRoot].Rank)
                 subsets[yRoot].Parent = xRoot;
