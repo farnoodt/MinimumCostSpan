@@ -17,22 +17,21 @@ namespace MinimumCostSpan
                 Subsets[i].Parent = FindParent(Subsets, Subsets[i].Parent);
 
             return Subsets[i].Parent;
-
         }
 
         public void Union(Subset[] subsets, int X, int Y)
         {
-            int xRoot = FindParent(subsets, X);
-            int yRoot = FindParent(subsets, Y);
+            int xParent = FindParent(subsets, X);
+            int yParent = FindParent(subsets, Y);
 
-            if (subsets[xRoot].Rank > subsets[yRoot].Rank)
-                subsets[yRoot].Parent = xRoot;
-            else if (subsets[xRoot].Rank < subsets[yRoot].Rank)
-                subsets[xRoot].Parent = yRoot;
+            if (subsets[xParent].Rank > subsets[yParent].Rank)
+                subsets[yParent].Parent = xParent;
+            else if (subsets[xParent].Rank < subsets[yParent].Rank)
+                subsets[xParent].Parent = yParent;
             else
             {
-                subsets[yRoot].Parent = xRoot;
-                subsets[xRoot].Rank++;
+                subsets[yParent].Parent = xParent;
+                subsets[xParent].Rank++;
             }
         }
     }
